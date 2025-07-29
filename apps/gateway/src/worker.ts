@@ -9,7 +9,7 @@ import {
 	tables,
 } from "@llmgateway/db";
 
-import { getProject, getOrganization } from "./lib/cache";
+import { getProject, getOrganization } from "./lib/cache.d1";
 import { consumeFromQueue, LOG_QUEUE } from "./lib/redis";
 import { calculateFees } from "../../api/src/lib/fee-calculator";
 import { stripe } from "../../api/src/routes/payments";

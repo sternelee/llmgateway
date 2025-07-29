@@ -9,11 +9,18 @@
 	],
 	"scripts": {
 		"build": "tsc && tsup && pnpm run generate",
+		"build:worker": "tsup src/worker.d1.ts --format esm --dts --clean --minify",
+		"deploy": "wrangler deploy --compatibility-date=2024-07-29",
+		"deploy:staging": "wrangler deploy --env staging --compatibility-date=2024-07-29",
 		"dev": "nodemon -e ts,json --exec \"tsx src/serve.ts\"",
+		"dev:worker": "wrangler dev --compatibility-date=2024-07-29",
 		"generate": "NODE_ENV=production tsx ./src/scripts/generate-openapi.ts",
-		"start": "node dist/serve.js"
+		"start": "node dist/serve.js",
+		"typecheck": "tsc --noEmit",
+		"typecheck:worker": "tsc --noEmit src/worker.d1.ts"
 	},
 	"dependencies": {
+		"@cloudflare/workers-types": "4.20250726.0",
 		"@hono/node-server": "^1.14.1",
 		"@hono/swagger-ui": "^0.5.1",
 		"@hono/zod-openapi": "^0.19.6",

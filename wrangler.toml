@@ -1,0 +1,66 @@
+name = "llmgateway"
+main = "dist/worker.js"
+compatibility_date = "2024-07-29"
+compatibility_flags = ["nodejs_compat"]
+
+[env.production]
+workers_dev = false
+routes = [
+  { pattern = "gateway.leeapp.dev/*", zone_name = "leeapp.dev" },
+  { pattern = "llm.leeapp.dev/*", zone_name = "leeapp.dev" },
+]
+
+[env.staging]
+workers_dev = true
+
+# D1 Database bindings
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "llmgateway-prod"
+database_id = "your-production-d1-database-id"
+
+[[env.staging.d1_databases]]
+binding = "DB"
+database_name = "llmgateway-staging"
+database_id = "your-staging-d1-database-id"
+
+# KV for caching (replaces Redis)
+[[env.production.kv_namespaces]]
+binding = "CACHE"
+id = "your-production-kv-namespace-id"
+
+[[env.staging.kv_namespaces]]
+binding = "CACHE"
+id = "your-staging-kv-namespace-id"
+
+# Environment variables
+[env.production.vars]
+NODE_ENV = "production"
+OPENAI_API_KEY = ""
+ANTHROPIC_API_KEY = ""
+GOOGLE_API_KEY = ""
+STRIPE_SECRET_KEY = ""
+STRIPE_WEBHOOK_SECRET = ""
+POSTHOG_API_KEY = ""
+
+[env.staging.vars]
+NODE_ENV = "staging"
+OPENAI_API_KEY = ""
+ANTHROPIC_API_KEY = ""
+GOOGLE_API_KEY = ""
+STRIPE_SECRET_KEY = ""
+STRIPE_WEBHOOK_SECRET = ""
+POSTHOG_API_KEY = ""
+
+# Secrets (use `wrangler secret put` to set these)
+# OPENAI_API_KEY
+# ANTHROPIC_API_KEY
+# GOOGLE_API_KEY
+# STRIPE_SECRET_KEY
+# STRIPE_WEBHOOK_SECRET
+# POSTHOG_API_KEY
+
+[build]
+command = "pnpm build"
+cwd = "."
+watch_dir = "src"

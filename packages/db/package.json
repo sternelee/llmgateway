@@ -25,6 +25,7 @@
 		"seed": "tsx seed.ts"
 	},
 	"dependencies": {
+		"@cloudflare/workers-types": "4.20250726.0",
 		"drizzle-orm": "1.0.0-beta.1-7946562",
 		"nanoid": "5.1.5",
 		"pg": "^8.14.1",
@@ -34,5 +35,11 @@
 		"@types/pg": "^8.11.12",
 		"drizzle-kit": "1.0.0-beta.1-7946562",
 		"tsx": "^4.19.3"
+	},
+	"scripts-d1": {
+		"build": "tsc && tsup",
+		"generate-d1": "pnpm drizzle-kit generate --config drizzle.config.d1.ts",
+		"migrate-d1": "pnpm drizzle-kit migrate --config drizzle.config.d1.ts",
+		"push-d1": "pnpm drizzle-kit push --force --config drizzle.config.d1.ts"
 	}
 }

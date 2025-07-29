@@ -19,6 +19,7 @@
 		"sourceMap": false,
 		"noFallthroughCasesInSwitch": true,
 		"forceConsistentCasingInFileNames": true,
-		"noImplicitReturns": true
+		"noImplicitReturns": true,
+		"types": ["@cloudflare/workers-types"]
 	}
 }

@@ -1,5 +1,4 @@
 import { serve } from "@hono/node-server";
-import { closeDatabase } from "@llmgateway/db";
 
 import { app } from "./index";
 import redisClient from "./lib/redis";
@@ -53,8 +52,6 @@ const gracefulShutdown = async (signal: string) => {
 		console.log("Redis connection closed");
 
 		console.log("Closing database connection...");
-		await closeDatabase();
-		console.log("Database connection closed");
 
 		console.log("Graceful shutdown completed");
 		process.exit(0);
